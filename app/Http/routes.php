@@ -11,6 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware'=>'language'],function(){
+
+    Route::auth();
+
+    Route::group(['middleware'=>'auth'],function (){
+
+        Route::get('/', 'HomeController@index');
+
+    });
+
 });
+
+
+
