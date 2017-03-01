@@ -14,7 +14,7 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('real_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
@@ -39,6 +39,7 @@ class CreateProfilesTable extends Migration
         Schema::table('profiles',function (Blueprint $table){
             $table->dropForeign('profiles_user_id_foreign');
         });
+
         Schema::drop('profiles');
     }
 }
