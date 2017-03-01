@@ -15,15 +15,27 @@ use App\Http\Requests;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if(Gate::denies('manage_user',Auth::user()))
         {
             return Redirect::back();
         }
-        $users = User::all();
+        $inputs = $request->has('select')?json_decode($request->input('select'),true):$request->all();
+        $users = User::where(function($query) use ($inputs){
+            if (isset($inputs['findByUserName'])){
+                $query->where('name','LIKE','%'.$inputs['findByUserName'].'%');
+            }
+        })
+        ->orWhereHas('profile', function($in) use ($inputs){
+            if (isset($inputs['findByUserName'])){
+                $in->where('real_name','LIKE','%'.$inputs['findByUserName'].'%');
+            }
+        })
+        ->paginate(10);
 
-        return view('users.index',compact('users'));
+        $a = $inputs;
+        return view('users.index',compact('users','a'));
     }
 
     public function create()

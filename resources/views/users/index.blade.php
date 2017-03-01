@@ -11,6 +11,17 @@
             <a class="btn btn-primary" href="/users/create">
                 添加用户
             </a>
+
+            <form style="margin-top: 20px;">
+                <div class="form-inline">
+                    <input type="text" name="findByUserName" class="form-control"
+                            placeholder="请输入工号/姓名搜索"
+                            value="{{isset($a['findByUserName'])?$a['findByUserName']:null}}"/>
+                    <button type="submit" class="btn btn-primary">
+                        搜索
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div class="table">
@@ -43,6 +54,9 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="text-center">
+            {!! $users->appends(['select'=>isset($a)?json_encode($a):""])->render() !!}
         </div>
     </div>
 </div>
