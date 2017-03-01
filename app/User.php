@@ -23,4 +23,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //用户和语言一对多
+    public function language()
+    {
+        return $this->belongsTo('App\Language');
+    }
+
 }
