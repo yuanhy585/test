@@ -24,10 +24,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //用户和语言一对多
+    //用户和语言一对一
     public function language()
     {
         return $this->belongsTo('App\Language');
+    }
+
+    //用户和角色一对一
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    //用户和状态一对一
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
+    }
+
+    //用户和文档信息一对一
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
     }
 
 }
