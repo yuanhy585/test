@@ -16,6 +16,7 @@ class ComposerStaticInit2b2b61f7386885acc72d22f28e30bfa1
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'c7a30ad2fd3d198cdc58d9fb1f8a7ed4' => __DIR__ . '/../..' . '/app/function.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -270,7 +271,6 @@ class ComposerStaticInit2b2b61f7386885acc72d22f28e30bfa1
         'CreateProfilesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_124214_create_profiles_table.php',
         'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_123332_create_roles_table.php',
         'CreateStatusesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_122520_create_statuses_table.php',
-        'CreateUserProfilesTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_01_002740_create_user_profiles_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
