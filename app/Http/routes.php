@@ -19,6 +19,11 @@ Route::group(['middleware'=>'language'],function(){
 
         Route::get('/', 'HomeController@index');
 
+        //routes for userManagement
+        Route::post('users/store','UserController@store');
+        Route::post('users/{id}/update','UserController@update');
+        Route::get('users/{id}/delete','UserController@destroy');
+        Route::resource('users','UserController');
     });
 
 });
