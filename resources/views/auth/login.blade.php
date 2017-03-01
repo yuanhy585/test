@@ -54,10 +54,10 @@
                                     <i class="fa fa-btn fa-sign-in"></i> 登录
                                 </button>
 
-                                <button class="btn btn-danger" href="{{ url('/password/reset') }}"
+                                <a class="btn btn-danger" href="{{ url('/password/reset') }}"
                                         style="margin-left:50px;">
                                     重置密码
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </form>
