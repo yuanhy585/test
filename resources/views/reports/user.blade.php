@@ -46,7 +46,7 @@
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->status->name}}</td>
                         <td>{{$user->language->name}}</td>
-                        <td>{{$user->organization->name}}</td>
+                        <td>{{App\Organization::where('id',$user->department_id)->first()->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->profile->phone}}</td>
                         <td>{{$user->profile->address}}</td>
