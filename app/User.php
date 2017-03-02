@@ -48,4 +48,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Profile');
     }
 
+    //用户和部门一对一
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization');
+    }
+
 }

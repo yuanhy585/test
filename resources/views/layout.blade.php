@@ -46,6 +46,17 @@
                         </ul>
                     </li>
                     @endif
+                    @if(Auth::user()->role_id == 4)
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                报表<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/usersInfo">用户信息</a></li>
+                                <li><a href="">xxx</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             @endif
 

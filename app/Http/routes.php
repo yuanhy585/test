@@ -24,6 +24,12 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('users/{id}/update','UserController@update');
         Route::get('users/{id}/delete','UserController@destroy');
         Route::resource('users','UserController');
+
+        //routes for reports
+        Route::get('/usersInfo','ReportController@user');
+
+
+
     });
 
 });

@@ -21,11 +21,19 @@ class UserPolicy
 
     public function manage_user(User $user)
     {
-        if ($user->role_id >2)
+        if ($user->role_id > 2)
             return true;
         else
             return false;
 
+    }
+
+    public function check_report(User $user)
+    {
+        if ($user->role_id > 3)
+            return true;
+        else
+            return false;
     }
 
 }
