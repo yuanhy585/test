@@ -7,12 +7,8 @@
             用户管理
         </div><hr/>
 
-        <div style="margin-bottom: 20px;">
-            <a class="btn btn-primary" href="/users/create">
-                添加用户
-            </a>
-
-            <form style="margin-top: 20px;">
+        <div style="margin-bottom: 20px;float: right;">
+            <form>
                 <div class="form-inline">
                     <input type="text" name="findByUserName" class="form-control"
                             placeholder="请输入工号/姓名搜索"
@@ -22,6 +18,10 @@
                     </button>
                 </div>
             </form>
+
+            <a class="btn btn-primary" href="/users/create"  style="margin: 20px 0 0 170px;">
+                添加用户
+            </a>
         </div>
 
         <div class="table">

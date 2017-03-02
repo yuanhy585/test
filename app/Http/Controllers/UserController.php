@@ -48,7 +48,8 @@ class UserController extends Controller
         $statuses = Status::all()->pluck('name','id');
         $languages = Language::all()->pluck('name','id');
         $departments = Organization::all()->pluck('name','id');
-        return view('users.create',compact('roles','statuses','languages','departments'));
+        $status_id = 2;
+        return view('users.create',compact('roles','statuses','languages','departments','status_id'));
     }
 
     public function store(Request $request)
@@ -121,7 +122,7 @@ class UserController extends Controller
         $user->status_id = $inputs['status_id'];
         $user->language_id = isset($inputs['language_id'])?$inputs['language_id']:"1";
         $user->department_id = $inputs['department_id'];
-        $user->password = $inputs['password'];
+        $user->password = isset($inputs['password'])?bcrypt($inputs['password']):$user->password;
         $user->save();
 
         $profile = Profile::where('user_id',$id)->first();
@@ -140,7 +141,12 @@ class UserController extends Controller
         {
             return Redirect::back();
         }
+        $AM_id = 4;
         $user = User::where('id',$id)->first();
+        if($user->role_id == $AM_id)
+        {
+            return redirect('/users');
+        }
         $user->delete();
 
         return back();

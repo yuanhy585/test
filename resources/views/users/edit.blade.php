@@ -66,7 +66,7 @@
 
                     密码：
                     <input class="form-control" name="password" type="password"
-                           style="margin:10px 0;" value="{{$user->password}}"/>
+                           style="margin:10px 0;"/>
                 </div>
                 <div class="col-md-5">
                     电话：
@@ -81,10 +81,6 @@
                     备注：
                     <input class="form-control" name="notes" type="text"
                            style="margin:10px 0;" value="{{$user->profile->notes}}"/>
-
-                    用户id：
-                    <input class="form-control" name="user_id" type="text"
-                           style="margin:10px 0;" value="{{$user->id}}" disabled/>
                 </div>
 
                 <div class="col-md-10 text-center" style="margin-top:10px;">

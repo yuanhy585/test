@@ -32,7 +32,7 @@
                     状态：
                     <select class="form-control" name="status_id" style="margin:10px 0;">
                         @foreach($statuses as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($id == $status_id) selected @endif value="{{$id}}">{{$name}}</option>
                         @endforeach
                     </select>
                 </div>

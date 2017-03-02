@@ -30,49 +30,59 @@
         </div>
 
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                        用户管理<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/users">用户管理</a></li>
-                        <li><a href="">组织结构管理</a></li>
-                        <li><a href="">用户导入</a></li>
-                        <li><a href="">组织结构导入</a></li>
-                        <li><a href="">用户属性管理</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                @if (Auth::guest())
-                    <li>
-                        <div style="line-height:3.5em;">
-                            <a href="">中文</a>|
-                            <a href="">English</a>
-                        </div>
-                    </li>
-                @else
+            @if(Auth::user())
+                <ul class="nav navbar-nav">
+                    @if(Auth::user()->role_id > 2)
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            用户管理<span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="">修改密码</a></li>
-                            <li><a href="{{ url('/logout') }}">退出</a></li>
+                            <li><a href="/users">用户管理</a></li>
+                            <li><a href="">组织结构管理</a></li>
+                            <li><a href="">用户导入</a></li>
+                            <li><a href="">组织结构导入</a></li>
+                            <li><a href="">用户属性管理</a></li>
                         </ul>
                     </li>
-                @endif
-            </ul>
+                    @endif
+                </ul>
+            @endif
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Auth::guest())
+                        <li>
+                            <div style="line-height:3.5em;">
+                                <a href="">中文</a>|
+                                <a href="">English</a>
+                            </div>
+                        </li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="">修改密码</a></li>
+                                <li><a href="{{ url('/logout') }}">退出</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                </ul>
         </div>
     </div>
 </nav>
 
 @yield('content')
 
+<div class="footer text-center">
+    <footer style="position:absolute; bottom:0; width:100%; height:2em;
+            line-height:2em;background-color: #eee;">
+        All Rights Reserved By YHY.
+    </footer>
+</div>
 <div class="js">
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
