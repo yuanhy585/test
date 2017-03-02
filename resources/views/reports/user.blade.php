@@ -7,7 +7,20 @@
              用户信息
          </div><hr/>
 
-        <div class="table-responsive">
+        <div style="float:right;margin-bottom: 20px;">
+            <form>
+                <div class="form-inline">
+                    <input type="text" name="findByUserName" class="form-control"
+                            placeholder="请输入工号/姓名搜索"
+                            value="{{isset($a['findByUserName'])?$a['findByUserName']:null}}"/>
+                    <button class="btn btn-primary" type="submit">
+                        搜索
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table">
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -42,6 +55,10 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="text-center">
+            {!! $users->appends(['select'=>isset($s)?json_encode($a):null])->render() !!}
         </div>
     </div>
 </div>
