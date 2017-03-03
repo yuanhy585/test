@@ -7,7 +7,7 @@
              用户信息
          </div><hr/>
 
-        <div style="float:right;margin-bottom: 20px;">
+        <div style="margin-bottom: 20px;">
             <form>
                 <div class="form-inline">
                     <input type="text" name="findByUserName" class="form-control"
@@ -24,9 +24,8 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>用户名</th>
-                    <th>实名</th>
+                    <th>姓名</th>
                     <th>角色</th>
                     <th>状态</th>
                     <th>语言</th>
@@ -40,17 +39,16 @@
                 <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
-                        <td>{{$user->profile->real_name}}</td>
-                        <td>{{$user->role->name}}</td>
-                        <td>{{$user->status->name}}</td>
-                        <td>{{$user->language->name}}</td>
-                        <td>{{App\Organization::where('id',$user->department_id)->first()->name}}</td>
+                        <td>{{App\Profile::where('user_id',$user->id)->first()->real_name}}</td>
+                        <td>{{App\Role::where('id',$user->role_id)->first()->name}}</td>
+                        <td>{{App\Status::where('id',$user->status_id)->first()->name}}</td>
+                        <td>{{App\Language::where('id',$user->language_id)->first()->name}}</td>
+                        <td>{{App\Organization::where('id',$user->organization_id)->first()->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->profile->phone}}</td>
-                        <td>{{$user->profile->address}}</td>
-                        <td>{{$user->profile->notes}}</td>
+                        <td>{{App\Profile::where('user_id',$user->id)->first()->phone}}</td>
+                        <td>{{App\Profile::where('user_id',$user->id)->first()->address}}</td>
+                        <td>{{App\Profile::where('user_id',$user->id)->first()->notes}}</td>
                     </tr>
                 @endforeach
                 </tbody>
