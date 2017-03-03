@@ -42,7 +42,7 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/users">用户管理</a></li>
                                         <li><a href="">组织结构管理</a></li>
-                                        <li><a href="">用户导入</a></li>
+                                        <li><a href="/usersImport">用户导入</a></li>
                                         <li><a href="">组织结构导入</a></li>
                                         <li><a href="">用户属性管理</a></li>
                                     </ul>

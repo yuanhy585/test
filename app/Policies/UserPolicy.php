@@ -36,4 +36,12 @@ class UserPolicy
             return false;
     }
 
+    public function import_info(User $user)
+    {
+        if ($user->role_id > 2)
+            return true;
+        else
+            return false;
+    }
+
 }

@@ -23,10 +23,15 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('users/store','UserController@store');
         Route::post('users/{id}/update','UserController@update');
         Route::get('users/{id}/delete','UserController@destroy');
-        Route::resource('users','UserController');
+        Route::resource('users','UserController',['except'=>'show']);
 
         //routes for reports
-        Route::get('/usersInfo','ReportController@user');
+        Route::get('usersInfo','ReportController@user');
+
+        //routes for imports
+        Route::get('usersImport','ImportController@importUsers');
+        Route::post('usersImport','ImportController@saveUserImport');
+        Route::get('usersExample','ImportController@importExample');
 
 
 
