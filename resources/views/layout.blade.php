@@ -11,89 +11,95 @@
     <link rel="stylesheet" href="/css/style.css" >
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
+<div id="container">
+    <div id="header">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
 
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Test
-            </a>
-        </div>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Test
+                    </a>
+                </div>
 
-        <div class="collapse navbar-collapse">
-            @if(Auth::user())
-                <ul class="nav navbar-nav">
-                    @if(Auth::user()->role_id > 2)
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                            用户管理<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/users">用户管理</a></li>
-                            <li><a href="">组织结构管理</a></li>
-                            <li><a href="">用户导入</a></li>
-                            <li><a href="">组织结构导入</a></li>
-                            <li><a href="">用户属性管理</a></li>
+                <div class="collapse navbar-collapse">
+                    @if(Auth::user())
+                        <ul class="nav navbar-nav">
+                            @if(Auth::user()->role_id > 2)
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        用户管理<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/users">用户管理</a></li>
+                                        <li><a href="">组织结构管理</a></li>
+                                        <li><a href="">用户导入</a></li>
+                                        <li><a href="">组织结构导入</a></li>
+                                        <li><a href="">用户属性管理</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(Auth::user()->role_id == 4)
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        报表<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/usersInfo">用户信息</a></li>
+                                        <li><a href="">xxx</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
-                    </li>
                     @endif
-                    @if(Auth::user()->role_id == 4)
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                报表<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/usersInfo">用户信息</a></li>
-                                <li><a href="">xxx</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            @endif
 
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Auth::guest())
-                        <li>
-                            <div style="line-height:3.5em;">
-                                <a href="">中文</a>|
-                                <a href="">English</a>
-                            </div>
-                        </li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::guest())
+                            <li>
+                                <div style="line-height:3.5em;">
+                                    <a href="">中文</a>|
+                                    <a href="">English</a>
+                                </div>
+                            </li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="">修改密码</a></li>
-                                <li><a href="{{ url('/logout') }}">退出</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-        </div>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="">修改密码</a></li>
+                                    <li><a href="{{ url('/logout') }}">退出</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-</nav>
 
-@yield('content')
+    <div id="page" class="clearfix">
+        @yield('content')
+    </div>
+</div>
 
-<div class="footer text-center">
-    <footer style="position:absolute; bottom:0; width:100%; height:2em;
-            line-height:2em;background-color: #eee;">
+<div id="footer" class="footer text-center">
+    <footer>
         All Rights Reserved By YHY.
     </footer>
 </div>
+
 <div class="js">
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
