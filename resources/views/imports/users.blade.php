@@ -5,6 +5,14 @@
     $(function(){
         $("[data-toggle = 'tooltip']").tooltip();
     });
+
+    function ifDelete(e) {
+        if(!confirm('是否确认删除?')) {
+            return false;
+        }else{
+            return true;
+        }
+    }
 </script>
 @append
 
@@ -62,9 +70,14 @@
                                href="/importLog/{{$import->id}}/download">
                                 下载
                             </a>
-                            <a class="btn btn-danger" href="">
-                                删除
-                            </a>
+
+                            <form action="importLog/{{$import->id}}" method="POST" style="display: inline;">
+                                <input name="_method" type="hidden" value="DELETE" />
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <button class="btn btn-danger" type="submit" onclick="return ifDelete()">
+                                    删除
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

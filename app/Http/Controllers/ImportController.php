@@ -116,4 +116,10 @@ class ImportController extends Controller
         return Response::download($url);
     }
 
+    public function destroy($id)
+    {
+        $import = ImportLog::where('id',$id)->first();
+        $import->delete();
+    }
+
 }

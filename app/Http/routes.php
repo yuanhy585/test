@@ -33,7 +33,7 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('usersImport','ImportController@saveUserImport');
         Route::get('usersExample','ImportController@importExample');
         Route::get('importLog/{id}/download','ImportController@download');
-
+        Route::delete('importLog/{id}','ImportController@destroy');
 
 
     });
