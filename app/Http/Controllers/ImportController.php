@@ -120,6 +120,8 @@ class ImportController extends Controller
     {
         $import = ImportLog::where('id',$id)->first();
         $import->delete();
+
+        return back();
     }
 
 }
