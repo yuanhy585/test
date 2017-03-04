@@ -37,29 +37,39 @@
             {!! errors_for('file',$errors) !!}
         </div>
 
-        {{--<div class="table">--}}
-            {{--<table class="table table-bordered table-striped">--}}
-                {{--<thead>--}}
-                {{--<tr>--}}
-                    {{--<th>文件名</th>--}}
-                    {{--<th>创建时间</th>--}}
-                    {{--<th>用户</th>--}}
-                    {{--<th>日志</th>--}}
-                    {{--<th>操作</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-                {{--<tbody>--}}
-                {{--<tr>--}}
-                    {{--<td></td>--}}
-                    {{--<td></td>--}}
-                    {{--<td></td>--}}
-                    {{--<td></td>--}}
-                    {{--<td></td>--}}
-                {{--</tr>--}}
-                {{--</tbody>--}}
-            {{--</table>--}}
-        {{--</div>--}}
-
+        <div class="table">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>文件名</th>
+                    <th>创建时间</th>
+                    <th>用户</th>
+                    <th>日志</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($imports as $import)
+                    <tr>
+                        <td>{{$import->file_name}}</td>
+                        <td>{{$import->created_at}}</td>
+                        <td>{{App\Profile::where('user_id',$import->user_id)->first()->real_name}}</td>
+                        <td>
+                            <a href="" style="text-decoration: none;">查看</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="" style="margin-right: 20px;">
+                                下载
+                            </a>
+                            <a class="btn btn-danger" href="">
+                                删除
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @stop

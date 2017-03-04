@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\ImportLog;
 use App\Profile;
+use App\Repositories\ImportLogRepository;
 use App\User;
-use Gate, Auth, Redirect, Response,Excel;
+use Gate, Auth, Redirect, Response,Excel,Storage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class ImportController extends Controller
 {
+    protected $destinationPath = "/importedFile/logs";
+    protected $import_gestion;
+
+    public function __construct(
+        ImportLogRepository $import_gestion
+    )
+    {
+        $this->import_gestion = $import_gestion;
+    }
+
     public function importUsers()
     {
         if (Gate::denies('import_info',Auth::user()))
         {
             return Redirect::back();
         }
-        return view('imports.users');
+        $imports = ImportLog::where('type',1)->orderBy('created_at','desc')->get();
+        return view('imports.users',compact('imports'));
     }
 
     public function importExample()
@@ -34,6 +47,10 @@ class ImportController extends Controller
 
     public function saveUserImport(Request $request)
     {
+        if (Gate::denies('import_info',Auth::user()))
+        {
+            return Redirect::back();
+        }
         if ($request->hasFile('file'))
         {
             $extension = $request->file('file')->getClientOriginalExtension();
@@ -58,7 +75,7 @@ class ImportController extends Controller
                     $userData->language_id = isset($datum[3])?$datum[3]:"1";
                     $userData->organization_id = isset($datum[4])?$datum[4]:"1";
                     $userData->email = isset($datum[5])?$datum[5]:null;
-                    $userData->password = isset($datum[6])?$datum[6]:"123456";
+                    $userData->password = isset($datum[6])?bcrypt($datum[6]):bcrypt("123456");
                     $userData->save();
 
                     $profileData = new Profile();
@@ -70,6 +87,14 @@ class ImportController extends Controller
                     $profileData->save();
                 }
             }
+
+            $importLog = new ImportLog();
+            $importLog->file_name = $request->file('file')->getClientOriginalName();
+            $importLog->storage_name = $this->import_gestion->guid().'.'.$extension;
+            $importLog->type = 1;
+            $importLog->user_id = Auth::user()->id;
+            $importLog->save();
+
         }
 
         echo "导入成功，请查看数据库";

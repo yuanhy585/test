@@ -54,4 +54,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Organization');
     }
 
+    //用户和导入文件一对多
+    public function importLog()
+    {
+        return $this->hasMany('App\ImportLog');
+    }
+
 }
