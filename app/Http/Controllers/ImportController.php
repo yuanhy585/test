@@ -63,10 +63,10 @@ class ImportController extends Controller
 
                     $profileData = new Profile();
                     $profileData->user_id = $userData->id;
-                    $profileData->real_name = isset($datum[8])?$datum[8]:null;
-                    $profileData->phone = isset($datum[9])?$datum[9]:null;
-                    $profileData->address = isset($datum[10])?$datum[10]:null;
-                    $profileData->notes = isset($datum[11])?$datum[11]:null;
+                    $profileData->real_name = isset($datum[7])?$datum[7]:null;
+                    $profileData->phone = isset($datum[8])?$datum[8]:null;
+                    $profileData->address = isset($datum[9])?$datum[9]:null;
+                    $profileData->notes = isset($datum[10])?$datum[10]:null;
                     $profileData->save();
                 }
             }
