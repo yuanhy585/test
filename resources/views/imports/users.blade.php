@@ -58,7 +58,8 @@
                             <a href="" style="text-decoration: none;">查看</a>
                         </td>
                         <td>
-                            <a class="btn btn-success" href="" style="margin-right: 20px;">
+                            <a class="btn btn-success" style="margin-right: 20px;"
+                               href="/importLog/{{$import->id}}/download">
                                 下载
                             </a>
                             <a class="btn btn-danger" href="">

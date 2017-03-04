@@ -21,7 +21,7 @@ class ImportController extends Controller
     )
     {
         $this->import_gestion = $import_gestion;
-        $this->PATH = env('OSS_PATH','test');
+        $this->PATH = env('OSS_PATH','test'); //获取默认环境值，若不存在则返回第二个参数
     }
 
     public function importUsers()
@@ -105,4 +105,15 @@ class ImportController extends Controller
 
         echo "导入成功，请查看数据库";
     }
+
+    public function download($id)
+    {
+        $import = ImportLog::where('id',$id)->first();
+        $file = Storage::get($this->PATH.$this->destinationPath.$import->storage_name);
+        Storage::disk('local')->put($import->storage_name, $file);
+        $url = storage_path().'/app/'.$import->storage_name;
+
+        return Response::download($url);
+    }
+
 }

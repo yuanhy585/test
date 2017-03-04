@@ -32,6 +32,7 @@ Route::group(['middleware'=>'language'],function(){
         Route::get('usersImport','ImportController@importUsers');
         Route::post('usersImport','ImportController@saveUserImport');
         Route::get('usersExample','ImportController@importExample');
+        Route::get('importLog/{id}/download','ImportController@download');
 
 
 
