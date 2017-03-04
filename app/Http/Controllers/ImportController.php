@@ -13,7 +13,7 @@ use App\Http\Requests;
 
 class ImportController extends Controller
 {
-    protected $destinationPath = "/importedFile/logs";
+    protected $destinationPath = "/importedFile/logs/";
     protected $import_gestion;
 
     public function __construct(
@@ -21,6 +21,7 @@ class ImportController extends Controller
     )
     {
         $this->import_gestion = $import_gestion;
+        $this->PATH = env('OSS_PATH','test');
     }
 
     public function importUsers()
@@ -94,6 +95,11 @@ class ImportController extends Controller
             $importLog->type = 1;
             $importLog->user_id = Auth::user()->id;
             $importLog->save();
+
+            $result =  Storage::put(
+                $this->PATH.$this->destinationPath.$importLog->storage_name,
+                file_get_contents($request->file('file'))
+            );
 
         }
 

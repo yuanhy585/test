@@ -6,7 +6,6 @@ namespace App\Repositories;
 
 class ImportLogRepository
 {
-
     public function guid()
     {
         if (function_exists('existGuid')){
@@ -24,5 +23,4 @@ class ImportLogRepository
             return $storName;
         }
     }
-
 }
