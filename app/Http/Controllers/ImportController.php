@@ -67,9 +67,25 @@ class ImportController extends Controller
             foreach ($data as $datum)
             {
                 $userData = User::where('name',$datum[0])->first();
-                $emails = User::all()->pluck('email')->toArray();
-                if(!$userData  && !in_array($datum[5],$emails))
+                $profile = Profile::where('user_id',$userData->id)->first();
+                if($userData)
                 {
+                    $userData->role_id = isset($datum[1])?$datum[1]:"1";
+                    $userData->status_id = isset($datum[2])?$datum[2]:"2";
+                    $userData->language_id = isset($datum[3])?$datum[3]:"1";
+                    $userData->organization_id = isset($datum[4])?$datum[4]:"1";
+                    $userData->email = isset($datum[5])?$datum[5]:null;
+                    $userData->password = isset($datum[6])?bcrypt($datum[6]):bcrypt("123456");
+                    $userData->save();
+
+                    $profile->user_id = $userData->id;
+                    $profile->real_name = isset($datum[7])?$datum[7]:null;
+                    $profile->phone = isset($datum[8])?$datum[8]:null;
+                    $profile->address = isset($datum[9])?$datum[9]:null;
+                    $profile->notes = isset($datum[10])?$datum[10]:null;
+                    $profile->save();
+
+                } else {
                     $userData = new User();
                     $userData->name = $datum[0];
                     $userData->role_id = isset($datum[1])?$datum[1]:"1";
