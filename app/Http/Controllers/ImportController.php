@@ -67,7 +67,8 @@ class ImportController extends Controller
             foreach ($data as $datum)
             {
                 $userData = User::where('name',$datum[0])->first();
-                if(!$userData)
+                $emails = User::all()->pluck('email')->toArray();
+                if(!$userData  && !in_array($datum[5],$emails))
                 {
                     $userData = new User();
                     $userData->name = $datum[0];
