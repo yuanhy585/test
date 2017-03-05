@@ -102,8 +102,7 @@ class ImportController extends Controller
             );
 
         }
-
-        echo "导入成功，请查看数据库";
+        return Redirect::back()->withInput()->withErrors(["check"=>"导入成功，请查看数据库"]);
     }
 
     public function download($id)
@@ -119,6 +118,11 @@ class ImportController extends Controller
     public function destroy($id)
     {
         $import = ImportLog::where('id',$id)->first();
+        //判断条件有何作用？
+        if(Storage::has($this->PATH.$this->destinationPath.$import->storage_name))
+        {
+            Storage::delete($this->PATH.$this->destinationPath.$import->storage_name);
+        }
         $import->delete();
 
         return back();

@@ -63,8 +63,11 @@
                         <td>{{$import->created_at}}</td>
                         <td>{{App\Profile::where('user_id',$import->user_id)->first()->real_name}}</td>
                         <td>
-                            <a href="" style="text-decoration: none;">查看</a>
+                            <a href="" style="text-decoration: none;" name="check">
+                                查看
+                            </a>
                         </td>
+
                         <td>
                             <a class="btn btn-success" style="margin-right: 20px;"
                                href="/importLog/{{$import->id}}/download">
@@ -81,6 +84,7 @@
                         </td>
                     </tr>
                 @endforeach
+                {!! errors_for("check",$errors) !!}
                 </tbody>
             </table>
         </div>
