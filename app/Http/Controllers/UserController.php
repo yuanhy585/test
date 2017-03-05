@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Attribute;
+use App\FifthAttribute;
+use App\FirstAttribute;
+use App\FourthAttribute;
 use App\Language;
 use App\Organization;
 use App\Profile;
 use App\Role;
+use App\SecondAttribute;
 use App\Status;
+use App\ThirdAttribute;
 use App\User;
 use Redirect,Gate,Auth;
 use Illuminate\Http\Request;
@@ -49,7 +55,14 @@ class UserController extends Controller
         $languages = Language::all()->pluck('name','id');
         $departments = Organization::all()->pluck('name','id');
         $status_id = 2;
-        return view('users.create',compact('roles','statuses','languages','departments','status_id'));
+        $attribute = Attribute::first();
+        $attr1s = FirstAttribute::all();
+        $attr2s = SecondAttribute::all();
+        $attr3s = ThirdAttribute::all();
+        $attr4s = FourthAttribute::all();
+        $attr5s = FifthAttribute::all();
+        return view('users.create',compact('roles','statuses','languages','departments',
+            'status_id','attribute','attr1s','attr2s','attr3s','attr4s','attr5s'));
     }
 
     public function store(Request $request)
@@ -80,7 +93,7 @@ class UserController extends Controller
         $user->role_id = isset($inputs['role_id'])?$inputs['role_id']:"1";
         $user->status_id = $inputs['status_id'];
         $user->language_id = isset($inputs['language_id'])?$inputs['language_id']:"1";
-        $user->department_id = $inputs['department_id'];
+        $user->organization_id = $inputs['department_id'];
         $user->email = $inputs['email'];
         $user->password = bcrypt($inputs['password']);
         $user->save();
@@ -91,6 +104,11 @@ class UserController extends Controller
         $profile->phone = isset($inputs['phone'])?$inputs['phone']:null;
         $profile->address = isset($inputs['address'])?$inputs['address']:null;
         $profile->notes = isset($inputs['notes'])?$inputs['notes']:null;
+        $profile->attribute1_id = isset($inputs['attr1_id'])?$inputs['attr1_id']:0;
+        $profile->attribute2_id = isset($inputs['attr2_id'])?$inputs['attr2_id']:0;
+        $profile->attribute3_id = isset($inputs['attr3_id'])?$inputs['attr3_id']:0;
+        $profile->attribute4_id = isset($inputs['attr4_id'])?$inputs['attr4_id']:0;
+        $profile->attribute5_id = isset($inputs['attr5_id'])?$inputs['attr5_id']:0;
         $profile->save();
 
         return redirect('/users');

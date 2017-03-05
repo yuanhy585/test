@@ -75,9 +75,48 @@
                     <input class="form-control" name="notes" type="text"
                            style="margin:10px 0;"/>
 
-                    {{--用户id：--}}
-                    {{--<input class="form-control" name="user_id" type="hidden"--}}
-                           {{--value="" style="margin:10px 0;"/>--}}
+                    {{$attribute->attr1_title}}：
+                    <select class="form-control" name="attr1_id" style="margin:10px 0;">
+                        <option value="0">请选择{{$attribute->attr1_title}}</option>
+                        @foreach($attr1s as $id => $title)
+                            <option value="{{$id}}">{{$title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    {{$attribute->attr2_title}}：
+                    <select class="form-control" name="attr2_id" style="margin:10px 0;">
+                        <option value="0">请选择{{$attribute->attr2_title}}</option>
+                        @foreach($attr2s as $id => $title)
+                            <option value="{{$id}}">{{$title}}</option>
+                        @endforeach
+                    </select>
+
+
+                    {{$attribute->attr4_title}}：
+                    <select class="form-control" name="attr4_id" style="margin:10px 0;">
+                        <option value="0">请选择{{$attribute->attr4_title}}</option>
+                        @foreach($attr2s as $id => $title)
+                            <option value="{{$id}}">{{$title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    {{$attribute->attr3_title}}：
+                    <select class="form-control" name="attr2_id" style="margin:10px 0;">
+                        <option value="0">请选择{{$attribute->attr3_title}}</option>
+                        @foreach($attr3s as $id => $title)
+                            <option value="{{$id}}">{{$title}}</option>
+                        @endforeach
+                    </select>
+
+                    {{$attribute->attr5_title}}：
+                    <select class="form-control" name="attr2_id" style="margin:10px 0;">
+                        <option value="0">请选择{{$attribute->attr5_title}}</option>
+                        @foreach($attr5s as $id => $title)
+                            <option value="{{$id}}">{{$title}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-10 text-center" style="margin-top:10px;">
