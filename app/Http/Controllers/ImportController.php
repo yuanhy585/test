@@ -135,11 +135,14 @@ class ImportController extends Controller
     public function destroy($id)
     {
         $import = ImportLog::where('id',$id)->first();
-        //判断条件有何作用？
+
+        //删除源地址文件
         if(Storage::has($this->PATH.$this->destinationPath.$import->storage_name))
         {
             Storage::delete($this->PATH.$this->destinationPath.$import->storage_name);
         }
+
+        //删除数据库内容
         $import->delete();
 
         return back();
