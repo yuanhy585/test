@@ -104,11 +104,11 @@ class UserController extends Controller
         $profile->phone = isset($inputs['phone'])?$inputs['phone']:null;
         $profile->address = isset($inputs['address'])?$inputs['address']:null;
         $profile->notes = isset($inputs['notes'])?$inputs['notes']:null;
-        $profile->attribute1_id = isset($inputs['attr1_id'])?$inputs['attr1_id']:0;
-        $profile->attribute2_id = isset($inputs['attr2_id'])?$inputs['attr2_id']:0;
-        $profile->attribute3_id = isset($inputs['attr3_id'])?$inputs['attr3_id']:0;
-        $profile->attribute4_id = isset($inputs['attr4_id'])?$inputs['attr4_id']:0;
-        $profile->attribute5_id = isset($inputs['attr5_id'])?$inputs['attr5_id']:0;
+        $profile->attribute1_id = isset($inputs['attr1_id'])?$inputs['attr1_id']:null;
+        $profile->attribute2_id = isset($inputs['attr2_id'])?$inputs['attr2_id']:null;
+        $profile->attribute3_id = isset($inputs['attr3_id'])?$inputs['attr3_id']:null;
+        $profile->attribute4_id = isset($inputs['attr4_id'])?$inputs['attr4_id']:null;
+        $profile->attribute5_id = isset($inputs['attr5_id'])?$inputs['attr5_id']:null;
         $profile->save();
 
         return redirect('/users');
@@ -125,7 +125,20 @@ class UserController extends Controller
         $statuses = Status::all()->pluck('name','id');
         $languages = Language::all()->pluck('name','id');
         $departments = Organization::all()->pluck('name','id');
-        return view('users.edit',compact('user','roles','statuses','languages','departments'));
+        $attribute = Attribute::first();
+        $attr1s = FirstAttribute::all();
+        $attr2s = SecondAttribute::all();
+        $attr3s = ThirdAttribute::all();
+        $attr4s = FourthAttribute::all();
+        $attr5s = FifthAttribute::all();
+        $attr1_id = Profile::where('user_id',$id)->first()->attribute1_id;
+        $attr2_id = Profile::where('user_id',$id)->first()->attribute2_id;
+        $attr3_id = Profile::where('user_id',$id)->first()->attribute3_id;
+        $attr4_id = Profile::where('user_id',$id)->first()->attribute4_id;
+        $attr5_id = Profile::where('user_id',$id)->first()->attribute5_id;
+        return view('users.edit',compact('user','roles','statuses','languages','departments',
+            'attribute','attr1s','attr2s','attr3s','attr4s','attr5s','attr1_id','attr2_id',
+            'attr3_id','attr4_id','attr5_id'));
     }
 
     public function update(Request $request, $id)
@@ -139,7 +152,7 @@ class UserController extends Controller
         $user->role_id = isset($inputs['role_id'])?$inputs['role_id']:"1";
         $user->status_id = $inputs['status_id'];
         $user->language_id = isset($inputs['language_id'])?$inputs['language_id']:"1";
-        $user->department_id = $inputs['department_id'];
+        $user->organization_id = $inputs['department_id'];
         $user->password = isset($inputs['password'])?bcrypt($inputs['password']):$user->password;
         $user->save();
 
@@ -148,6 +161,11 @@ class UserController extends Controller
         $profile->phone = isset($inputs['phone'])?$inputs['phone']:null;
         $profile->address = isset($inputs['address'])?$inputs['address']:null;
         $profile->notes = isset($inputs['notes'])?$inputs['notes']:null;
+        $profile->attribute1_id = isset($inputs['attr1_id'])?$inputs['attr1_id']:0;
+        $profile->attribute2_id = isset($inputs['attr2_id'])?$inputs['attr2_id']:0;
+        $profile->attribute3_id = isset($inputs['attr3_id'])?$inputs['attr3_id']:0;
+        $profile->attribute4_id = isset($inputs['attr4_id'])?$inputs['attr4_id']:0;
+        $profile->attribute5_id = isset($inputs['attr5_id'])?$inputs['attr5_id']:0;
         $profile->save();
 
         return redirect('/users');

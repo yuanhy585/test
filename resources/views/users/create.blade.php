@@ -91,8 +91,7 @@
                             <option value="{{$id}}">{{$title}}</option>
                         @endforeach
                     </select>
-
-
+                    
                     {{$attribute->attr4_title}}：
                     <select class="form-control" name="attr4_id" style="margin:10px 0;">
                         <option value="0">请选择{{$attribute->attr4_title}}</option>
