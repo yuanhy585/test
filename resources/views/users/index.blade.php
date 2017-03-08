@@ -13,31 +13,41 @@
                     <select class="form-control" name="attr1_id">
                         <option value="0">请选择{{$attribute->attr1_title}}</option>
                         @foreach($attr1s as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($a['attr1_id'] == $id) selected @endif value="{{$id}}">
+                                {{$name}}
+                            </option>
                         @endforeach
                     </select>
                     <select class="form-control" name="attr2_id">
                         <option value="0">请选择{{$attribute->attr2_title}}</option>
                         @foreach($attr2s as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($a['attr2_id'] == $id) selected @endif value="{{$id}}">
+                                {{$name}}
+                            </option>
                         @endforeach
                     </select>
                     <select class="form-control" name="attr3_id">
                         <option value="0">请选择{{$attribute->attr3_title}}</option>
                         @foreach($attr3s as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($a['attr3_id'] == $id) selected @endif value="{{$id}}">
+                                {{$name}}
+                            </option>
                         @endforeach
                     </select>
                     <select class="form-control" name="attr4_id">
                         <option value="0">请选择{{$attribute->attr4_title}}</option>
                         @foreach($attr4s as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($a['attr4_id'] == $id) selected @endif value="{{$id}}">
+                                {{$name}}
+                            </option>
                         @endforeach
                     </select>
                     <select class="form-control" name="attr5_id">
                         <option value="0">请选择{{$attribute->attr5_title}}</option>
                         @foreach($attr5s as $id => $name)
-                            <option value="{{$id}}">{{$name}}</option>
+                            <option @if($a['attr5_id'] == $id) selected @endif value="{{$id}}">
+                                {{$name}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
