@@ -28,6 +28,7 @@ class UserController extends Controller
             return Redirect::back();
         }
         $inputs = $request->has('select')?json_decode($request->input('select'),true):$request->all();
+        $status_id =2;
         if (isset($inputs['status_id'])){
             $status_id = $inputs['status_id'];
         }

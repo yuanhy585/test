@@ -44,7 +44,7 @@
                 <div class="form-inline" style="float:left;">
                     <select class="form-control" name="status_id">
                         @foreach($statuses as $id => $name)
-                            <option value="{{$id}}">
+                            <option @if($a['status_id'] == $id) selected @endif value="{{$id}}">
                                 {{$name}}
                             </option>
                         @endforeach
