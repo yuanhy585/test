@@ -28,20 +28,51 @@ class UserController extends Controller
             return Redirect::back();
         }
         $inputs = $request->has('select')?json_decode($request->input('select'),true):$request->all();
-        $users = User::where(function($query) use ($inputs){
-            if (isset($inputs['findByUserName'])){
-                $query->where('name','LIKE','%'.$inputs['findByUserName'].'%');
+        if (isset($inputs['status_id'])){
+            $status_id = $inputs['status_id'];
+        }
+        $statuses = Status::all()->pluck('name','id');
+        $attribute = Attribute::first();
+        $attr1s = FirstAttribute::all();
+        $attr2s = SecondAttribute::all();
+        $attr3s = ThirdAttribute::all();
+        $attr4s = FourthAttribute::all();
+        $attr5s = FifthAttribute::all();
+        $users = User::where(function($query) use ($inputs, $status_id) {
+            if ($status_id) {
+                $query->where('status_id', $status_id);
             }
-        })
-        ->orWhereHas('profile', function($in) use ($inputs){
-            if (isset($inputs['findByUserName'])){
-                $in->where('real_name','LIKE','%'.$inputs['findByUserName'].'%');
+            if (isset($inputs['findByUserName'])) {
+                $query->where(function ($q) use ($inputs) {
+                    $q->WhereHas('profile', function ($w) use ($inputs) {
+                        $w->where('real_name', 'LIKE', '%' . $inputs['findByUserName'] . '%');
+                    })
+                        ->orWhere('name', 'LIKE', '%' . $inputs['findByUserName'] . '%');
+                });
             }
+            $query->whereHas('profile',function ($q) use ($inputs){
+                if(isset($inputs['attr1_id']) && $inputs['attr1_id'] != 0){
+                    $q->where('attribute1_id',$inputs['attr1_id']);
+                }
+                if(isset($inputs['attr2_id']) && $inputs['attr2_id'] != 0){
+                    $q->where('attribute2_id',$inputs['attr2_id']);
+                }
+                if(isset($inputs['attr3_id']) && $inputs['attr3_id'] != 0){
+                    $q->where('attribute3_id',$inputs['attr3_id']);
+                }
+                if(isset($inputs['attr4_id']) && $inputs['attr4_id'] != 0){
+                    $q->where('attribute4_id',$inputs['attr4_id']);
+                }
+                if(isset($inputs['attr5_id']) && $inputs['attr5_id'] != 0){
+                    $q->where('attribute5_id',$inputs['attr5_id']);
+                }
+            });
         })
         ->paginate(10);
-
         $a = $inputs;
-        return view('users.index',compact('users','a'));
+        return view('users.index', compact('statuses', 'attribute', 'attr1s', 'attr2s',
+            'attr3s', 'attr4s', 'attr5s', 'users', 'a'));
+
     }
 
     public function create()
@@ -112,6 +143,13 @@ class UserController extends Controller
         $profile->save();
 
         return redirect('/users');
+    }
+
+    public function getInfo($id)
+    {
+        $user = User::where('id',$id)->first();
+        $attribute = Attribute::first();
+        return view('users.myInfo',compact('user','id','attribute'));
     }
 
     public function edit($id)

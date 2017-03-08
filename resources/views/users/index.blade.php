@@ -7,9 +7,48 @@
             用户管理
         </div><hr/>
 
-        <div style="margin-bottom: 20px;float: right;">
+        <div style="margin-bottom: 20px;float: left;">
             <form>
-                <div class="form-inline">
+                <div class="form-inline" style="margin-bottom: 10px;">
+                    <select class="form-control" name="attr1_id">
+                        <option value="0">请选择{{$attribute->attr1_title}}</option>
+                        @foreach($attr1s as $id => $name)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" name="attr2_id">
+                        <option value="0">请选择{{$attribute->attr2_title}}</option>
+                        @foreach($attr2s as $id => $name)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" name="attr3_id">
+                        <option value="0">请选择{{$attribute->attr3_title}}</option>
+                        @foreach($attr3s as $id => $name)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" name="attr4_id">
+                        <option value="0">请选择{{$attribute->attr4_title}}</option>
+                        @foreach($attr4s as $id => $name)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select class="form-control" name="attr5_id">
+                        <option value="0">请选择{{$attribute->attr5_title}}</option>
+                        @foreach($attr5s as $id => $name)
+                            <option value="{{$id}}">{{$name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-inline" style="float:left;">
+                    <select class="form-control" name="status_id">
+                        @foreach($statuses as $id => $name)
+                            <option value="{{$id}}">
+                                {{$name}}
+                            </option>
+                        @endforeach
+                    </select>
                     <input type="text" name="findByUserName" class="form-control"
                             placeholder="请输入工号/姓名搜索"
                             value="{{isset($a['findByUserName'])?$a['findByUserName']:null}}"/>
@@ -18,8 +57,10 @@
                     </button>
                 </div>
             </form>
+        </div>
 
-            <a class="btn btn-primary" href="/users/create"  style="margin: 20px 0 0 170px;">
+        <div style="clear: both;margin-bottom: 10px;">
+            <a class="btn btn-primary" href="/users/create" >
                 添加用户
             </a>
         </div>
