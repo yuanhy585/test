@@ -51,6 +51,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="form-inline" style="float:left;">
                     <select class="form-control" name="userStatus">
                         {{--主要就这块修改了，把name值status_id换成了userStatus,其余的去控制器里看--}}
@@ -66,6 +67,7 @@
                             </option>
                         @endforeach
                     </select>
+
                     <input type="text" name="findByUserName" class="form-control"
                             placeholder="请输入工号/姓名搜索"
                             value="{{isset($a['findByUserName'])?$a['findByUserName']:null}}"/>

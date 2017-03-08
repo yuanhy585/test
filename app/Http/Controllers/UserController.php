@@ -29,7 +29,7 @@ class UserController extends Controller
         }
         $inputs = $request->has('select')?json_decode($request->input('select'),true):$request->all();
 
-        $userStatus =2;
+        $userStatus = 2;
         if (isset($inputs['userStatus'])){
             $userStatus = $inputs['userStatus'];
         }
