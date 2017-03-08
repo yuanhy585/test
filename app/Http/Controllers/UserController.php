@@ -28,20 +28,23 @@ class UserController extends Controller
             return Redirect::back();
         }
         $inputs = $request->has('select')?json_decode($request->input('select'),true):$request->all();
-        $status_id =2;
-        if (isset($inputs['status_id'])){
-            $status_id = $inputs['status_id'];
+
+        $userStatus =2;
+        if (isset($inputs['userStatus'])){
+            $userStatus = $inputs['userStatus'];
         }
         $statuses = Status::all()->pluck('name','id');
+
         $attribute = Attribute::first();
         $attr1s = FirstAttribute::all();
         $attr2s = SecondAttribute::all();
         $attr3s = ThirdAttribute::all();
         $attr4s = FourthAttribute::all();
         $attr5s = FifthAttribute::all();
-        $users = User::where(function($query) use ($inputs, $status_id) {
-            if ($status_id) {
-                $query->where('status_id', $status_id);
+
+        $users = User::where(function($query) use ($inputs, $userStatus) {
+            if ($userStatus) {
+                $query->where('status_id', $userStatus);
             }
             if (isset($inputs['findByUserName'])) {
                 $query->where(function ($q) use ($inputs) {
@@ -70,9 +73,12 @@ class UserController extends Controller
             });
         })
         ->paginate(10);
+
+        $status_id = 2;
         $a = $inputs;
+
         return view('users.index', compact('statuses', 'attribute', 'attr1s', 'attr2s',
-            'attr3s', 'attr4s', 'attr5s', 'users', 'a'));
+            'attr3s', 'attr4s', 'attr5s', 'users', 'a','status_id'));
 
     }
 

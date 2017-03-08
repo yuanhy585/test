@@ -52,9 +52,16 @@
                     </select>
                 </div>
                 <div class="form-inline" style="float:left;">
-                    <select class="form-control" name="status_id">
+                    <select class="form-control" name="userStatus">
+                        {{--主要就这块修改了，把name值status_id换成了userStatus,其余的去控制器里看--}}
                         @foreach($statuses as $id => $name)
-                            <option @if($a['status_id'] == $id) selected @endif value="{{$id}}">
+                            <option
+                                    @if($status_id == $id && !isset($a['userStatus']))
+                                    selected
+                                    @elseif(isset($a['userStatus']) && $a['userStatus'] == $id)
+                                    selected
+                                    @endif value="{{$id}}"
+                            >
                                 {{$name}}
                             </option>
                         @endforeach
