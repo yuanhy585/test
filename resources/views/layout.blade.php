@@ -48,6 +48,18 @@
                                     </ul>
                                 </li>
                             @endif
+                            @if(Auth::user()->role_id > 1)
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        学习管理<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="">课程管理</a></li>
+                                        <li><a href="">考试管理</a></li>
+                                        <li><a href="">题库管理</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                             @if(Auth::user()->role_id == 4)
                                 <li class="dropdown">
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
@@ -78,6 +90,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/users/{{Auth::user()->id}}/myInfo">我的信息</a></li>
                                     <li><a href="">修改密码</a></li>
                                     <li><a href="{{ url('/logout') }}">退出</a></li>
                                 </ul>

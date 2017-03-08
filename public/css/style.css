@@ -28,3 +28,7 @@ html,body{
 thead,tbody,tr,th,td{
 	text-align: center;
 }
+
+table#myInfo thead,tbody,tr,th,td{
+	text-align: left;
+}

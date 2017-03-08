@@ -23,6 +23,7 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('users/store','UserController@store');
         Route::post('users/{id}/update','UserController@update');
         Route::get('users/{id}/delete','UserController@destroy');
+        Route::get('users/{id}/myInfo','UserController@getInfo');
         Route::resource('users','UserController',['except'=>'show']);
 
         //routes for reports
