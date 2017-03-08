@@ -47,6 +47,17 @@
                                         <li><a href="">用户属性管理</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        系统管理<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="">新闻管理</a></li>
+                                        <li><a href="">调研管理</a></li>
+                                        <li><a href="">资料库管理</a></li>
+                                        <li><a href="">知识分享管理</a></li>
+                                    </ul>
+                                </li>
                             @endif
                             @if(Auth::user()->role_id > 1)
                                 <li class="dropdown">
