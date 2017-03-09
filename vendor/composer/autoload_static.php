@@ -316,6 +316,7 @@ class ComposerStaticInit2b2b61f7386885acc72d22f28e30bfa1
         'CreateGendersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_123802_create_genders_table.php',
         'CreateImportLogsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_04_022948_create_import_logs_table.php',
         'CreateLanguagesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_123551_create_languages_table.php',
+        'CreateNewsTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_09_073003_create_news_table.php',
         'CreateOrganizationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_124913_create_organizations_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateProfilesTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_28_124214_create_profiles_table.php',
