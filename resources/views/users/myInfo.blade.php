@@ -8,105 +8,90 @@
 
     <div class="row">
         <div class="col-md-6">
-            <table id="myInfo" class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped">
                 <tr>
-                    <th>用户名:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{$user->name}}
-                    </th>
+                    <th>用户名</th>
+                    <td>{{$user->name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        姓名:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Profile::where('user_id',$id)->first()->real_name}}
-                    </th>
+                    <th>姓名</th>
+                    <td>{{App\Profile::where('user_id',$id)->first()->real_name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        角色:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Role::where('id',$user->role_id)->first()->name}}
-                    </th>
+                    <th>角色</th>
+                    <td>{{App\Role::where('id',$user->role_id)->first()->name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        状态:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Status::where('id',$user->status_id)->first()->name}}
-                    </th>
+                    <th>状态</th>
+                    <td>{{App\Status::where('id',$user->status_id)->first()->name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        语言:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Language::where('id',$user->language_id)->first()->name}}
-                    </th>
+                    <th>语言</th>
+                    <td>{{App\Language::where('id',$user->language_id)->first()->name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        部门:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Organization::where('id',$user->organization_id)->first()->name}}
-                    </th>
+                    <th>部门</th>
+                    <td>{{App\Organization::where('id',$user->organization_id)->first()->name}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        邮箱:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{$user->email}}
-                    </th>
+                    <th>邮箱</th>
+                    <td>{{$user->email}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        电话:&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{App\Profile::where('user_id',$id)->first()->phone}}
-                    </th>
+                    <th>电话</th>
+                    <td>{{App\Profile::where('user_id',$id)->first()->phone}}</td>
                 </tr>
                 <tr>
-                    <th>
-                        地址:&nbsp;&nbsp;&nbsp;&nbsp;
+                    <th>地址</th>
+                    <td>
                         {{App\Profile::where('user_id',$id)->first()->address}}
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th>
-                        备注:&nbsp;&nbsp;&nbsp;&nbsp;
+                    <th>备注</th>
+                    <td>
                         {{App\Profile::where('user_id',$id)->first()->notes}}
-                    </th>
+                    </td>
                 </tr>
                 @if($user->profile->attribute1_id !=0)
                     <tr>
-                        <th>
-                            {{$attribute->attr1_title}}:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>{{$attribute->attr1_title}}</th>
+                        <td>
                             {{App\FirstAttribute::where('id',$user->profile->attribute1_id)->first()->attriName}}
-                        </th>
+                        </td>
                     </tr>
                 @endif
                 @if($user->profile->attribute2_id !=0)
                     <tr>
-                        <th>
-                            {{$attribute->attr2_title}}:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>{{$attribute->attr2_title}}</th>
+                        <td>
                             {{App\FirstAttribute::where('id',$user->profile->attribute2_id)->first()->attriName}}
-                        </th>
+                        </td>
                     </tr>
                 @endif
                 @if($user->profile->attribute3_id !=0)
                     <tr>
-                        <th>
-                            {{$attribute->attr3_title}}:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>{{$attribute->attr3_title}}</th>
+                        <td>
                             {{App\FirstAttribute::where('id',$user->profile->attribute3_id)->first()->attriName}}
-                        </th>
+                        </td>
                     </tr>
                 @endif
 
                 @if($user->profile->attribute4_id !=0)
                     <tr>
-                        <th>
-                            {{$attribute->attr4_title}}:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>{{$attribute->attr4_title}}</th>
+                        <td>
                             {{App\FirstAttribute::where('id',$user->profile->attribute4_id)->first()->attriName}}
-                        </th>
+                        </td>
                     </tr>
                 @endif
                 @if($user->profile->attribute5_id !=0)
                     <tr>
-                        <th>
-                            {{$attribute->attr5_title}}:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>{{$attribute->attr5_title}}</th>
+                        <td>
                             {{App\FirstAttribute::where('id',$user->profile->attribute5_id)->first()->attriName}}
-                        </th>
+                        </td>
                     </tr>
                 @endif
             </table>
