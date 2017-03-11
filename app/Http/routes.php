@@ -26,6 +26,10 @@ Route::group(['middleware'=>'language'],function(){
         Route::get('users/{id}/myInfo','UserController@getInfo');
         Route::resource('users','UserController',['except'=>'show']);
 
+        //routes for newsManagement
+        Route::post('news/store','NewsController@store');
+        Route::resource('news','NewsController',['except'=>'show']);
+
         //routes for reports
         Route::get('usersInfo','ReportController@user');
 

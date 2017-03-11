@@ -44,4 +44,12 @@ class UserPolicy
             return false;
     }
 
+    public function create_news(User $user)
+    {
+        if ($user->role_id > 1)
+            return true;
+        else
+            return false;
+    }
+
 }

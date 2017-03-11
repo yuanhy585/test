@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
     <link rel="stylesheet" href="/css/style.css" >
+    @yield('css')
 </head>
 <body>
 <div id="container">
@@ -52,7 +53,7 @@
                                         系统管理<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="">新闻管理</a></li>
+                                        <li><a href="/news">新闻管理</a></li>
                                         <li><a href="">调研管理</a></li>
                                         <li><a href="">资料库管理</a></li>
                                         <li><a href="">知识分享管理</a></li>
