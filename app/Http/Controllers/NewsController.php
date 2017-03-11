@@ -40,6 +40,10 @@ class NewsController extends Controller
             return back()->withInput()->withErrors(['title'=>'标题不能为空']);
         }
         $post->title = $inputs['title'];
+        if ($inputs['content'] == null)
+        {
+            return back()->withInput()->withErrors(['content'=>'内容不能为空']);
+        }
         $post->content = $inputs['content'];
         $post->user_id = $inputs['user_id'];
         $post->publish = isset($inputs['publish'])?$inputs['publish']:0;

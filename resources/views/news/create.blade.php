@@ -11,15 +11,6 @@
 <script>
     //for umeditor plugin
     var um = UM.getEditor('myEditor');
-
-    //filter the content
-    function checkContent() {
-        if (!um.hasContents())
-        {
-            alert("文章内容不能为空");
-        }
-    }
-
 </script>
 @append
 
@@ -43,11 +34,9 @@
                 <p style="margin:50px 0 10px;">内容：</p>
 
                 {!! errors_for('content',$errors) !!}
-                <textarea id="myEditor" name="content" class="form-control"
-                          style="width:100%;height:240px;padding:0;margin:0;">
-                </textarea>
+                <textarea id="myEditor" name="content" class="form-control" style="width:100%;height:240px;padding:0;margin:0;"></textarea>
 
-                <button type="submit" class="btn btn-primary" onclick="checkContent()"
+                <button type="submit" class="btn btn-primary"
                         style="margin-top: 20px;">
                     提交
                 </button>
