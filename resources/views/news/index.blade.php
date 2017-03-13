@@ -36,7 +36,13 @@
                         <td>{{$post->created_at}}</td>
                         <td>
                             <a href="/news/{{$post->id}}/edit" class="btn btn-primary">编辑</a>
-                            <a href="" class="btn btn-success">发布</a>
+
+                            @if($post->publish == 0)
+                                <a href="/news/{{$post->id}}/push" class="btn btn-warning">发布</a>
+                            @else
+                                <a href="/news/{{$post->id}}/revoke" class="btn btn-success">撤销</a>
+                            @endif
+
                             <div style="display: inline-block;">
                                 <form action="/news/{{$post->id}}/delete" method="post">
                                     {{csrf_field()}}

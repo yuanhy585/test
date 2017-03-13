@@ -30,6 +30,8 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('news/store','NewsController@store');
         Route::post('news/{id}/update','NewsController@update');
         Route::post('news/{id}/delete','NewsController@destroy');
+        Route::get('news/{id}/push','NewsController@push');
+        Route::get('news/{id}/revoke','NewsController@revoke');
         Route::resource('news','NewsController',['except'=>'show']);
 
         //routes for reports

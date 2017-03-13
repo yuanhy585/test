@@ -92,4 +92,26 @@ class NewsController extends Controller
         return back();
     }
 
+    public function push($id)
+    {
+        $post = News::where('id',$id)->first();
+        if(Gate::allows('create_news',Auth::user()))
+        {
+            $post->publish = 1;
+            $post->save();
+        }
+        return back();
+    }
+
+    public function revoke($id)
+    {
+        $post = News::where('id',$id)->first();
+        if (Gate::allows('create_news',Auth::user()))
+        {
+            $post->publish = 0;
+            $post->save();
+        }
+        return back();
+    }
+
 }
