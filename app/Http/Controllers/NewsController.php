@@ -52,5 +52,44 @@ class NewsController extends Controller
         return redirect('/news');
     }
 
+    public function edit($id)
+    {
+        if (Gate::denies('create_news',Auth::user()))
+        {
+            return Redirect::back();
+        }
+
+        $post = News::where('id',$id)->first();
+        return view('news.edit',compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $inputs = $request->all();
+        $post = News::where('id',$id)->first();
+
+        if ($inputs['title'] == null){
+            return back()->withInput()->withErrors(['title'=>'标题不可为空']);
+        }
+        $post->title = $inputs['title'];
+        if ($inputs['content'] == null){
+            return back()->withInput()->withErrors(['title'=>'内容不可为空']);
+        }
+        $post->content = $inputs['content'];
+        $post->save();
+
+        return redirect('/news');
+    }
+
+    public function destroy($id)
+    {
+        $post = News::where('id',$id)->first();
+        if (Gate::denies('create_news',Auth::user()))
+        {
+            return Redirect::back();
+        }
+        $post->delete();
+        return back();
+    }
 
 }

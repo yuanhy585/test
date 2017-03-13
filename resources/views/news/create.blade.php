@@ -1,20 +1,9 @@
 @extends('layout')
 
-@section('css')
-    <link rel="stylesheet" href="/umeditor/themes/default/css/umeditor.min.css">
-@append
-
-@section('js')
-<script src="/umeditor/umeditor.config.js"></script>
-<script src="/umeditor/umeditor.min.js"></script>
-<script src="/umeditor/lang/zh-cn/zh-cn.js"></script>
-<script>
-    //for umeditor plugin
-    var um = UM.getEditor('myEditor');
-</script>
-@append
-
 @section('content')
+
+    @include('umeditor.head')
+
 <div class="container">
     <div class="row">
         <div class="page-title">

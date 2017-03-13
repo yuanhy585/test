@@ -1,19 +1,12 @@
 @extends('layout')
 
 @section('js')
-<script>
-    $(function(){
-        $("[data-toggle = 'tooltip']").tooltip();
-    });
-
-    function ifDelete(e) {
-        if(!confirm('是否确认删除?')) {
-            return false;
-        }else{
-            return true;
-        }
-    }
-</script>
+    <script src="/js/delete.js"></script>
+    <script>
+        $(function(){
+            $("[data-toggle = 'tooltip']").tooltip();
+        });
+    </script>
 @append
 
 @section('content')

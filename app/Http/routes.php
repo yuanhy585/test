@@ -22,12 +22,14 @@ Route::group(['middleware'=>'language'],function(){
         //routes for userManagement
         Route::post('users/store','UserController@store');
         Route::post('users/{id}/update','UserController@update');
-        Route::get('users/{id}/delete','UserController@destroy');
+        Route::post('users/{id}/delete','UserController@destroy');
         Route::get('users/{id}/myInfo','UserController@getInfo');
         Route::resource('users','UserController',['except'=>'show']);
 
         //routes for newsManagement
         Route::post('news/store','NewsController@store');
+        Route::post('news/{id}/update','NewsController@update');
+        Route::post('news/{id}/delete','NewsController@destroy');
         Route::resource('news','NewsController',['except'=>'show']);
 
         //routes for reports

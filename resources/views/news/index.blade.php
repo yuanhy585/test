@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('js')
+<script src="/js/delete.js"></script>
+@append
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -31,9 +35,17 @@
                         <td>{{App\Profile::where('user_id',$post->user_id)->first()->real_name}}</td>
                         <td>{{$post->created_at}}</td>
                         <td>
-                            <a href="" class="btn btn-primary">编辑</a>
+                            <a href="/news/{{$post->id}}/edit" class="btn btn-primary">编辑</a>
                             <a href="" class="btn btn-success">发布</a>
-                            <a href="" class="btn btn-danger">删除</a>
+                            <div style="display: inline-block;">
+                                <form action="/news/{{$post->id}}/delete" method="post">
+                                    {{csrf_field()}}
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return ifDelete()">
+                                        删除
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
