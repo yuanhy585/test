@@ -34,6 +34,12 @@ Route::group(['middleware'=>'language'],function(){
         Route::get('news/{id}/revoke','NewsController@revoke');
         Route::resource('news','NewsController',['except'=>'show']);
 
+        //routes for posts management
+        Route::post('posts/store','PostController@store');
+        Route::post('posts/{id}/update','PostController@update');
+        Route::post('posts/{id}/delete','PostController@destroy');
+        Route::resource('posts','PostController',['except'=>'show']);
+
         //routes for reports
         Route::get('usersInfo','ReportController@user');
 

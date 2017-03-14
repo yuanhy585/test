@@ -52,4 +52,12 @@ class UserPolicy
             return false;
     }
 
+    public function manage_post(User $user)
+    {
+        if ($user->role_id > 1)
+            return true;
+        else
+            return false;
+    }
+
 }

@@ -60,4 +60,10 @@ class User extends Authenticatable
         return $this->hasMany('App\ImportLog');
     }
 
+    //用户和文章一对多
+    public function post()
+    {
+        return $this->hasMany('App\Post');
+    }
+
 }
