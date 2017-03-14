@@ -84,7 +84,7 @@
                                     </ul>
                                 </li>
                             @endif
-                            <li><a href="">讨论区</a></li>
+                            <li><a href="/discussions">讨论区</a></li>
                         </ul>
                     @endif
 

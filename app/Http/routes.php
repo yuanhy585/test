@@ -40,6 +40,11 @@ Route::group(['middleware'=>'language'],function(){
         Route::post('posts/{id}/delete','PostController@destroy');
         Route::resource('posts','PostController',['except'=>'show']);
 
+        //routes for discussions management
+        Route::get('post/{id}','DiscussionController@show');
+        Route::post('comment/store','DiscussionController@store');
+        Route::resource('discussions','DiscussionController');
+
         //routes for reports
         Route::get('usersInfo','ReportController@user');
 
