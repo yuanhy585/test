@@ -54,6 +54,7 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/news">新闻管理</a></li>
+                                        <li><a href="">文章管理</a></li>
                                         <li><a href="">调研管理</a></li>
                                         <li><a href="">资料库管理</a></li>
                                         <li><a href="">知识分享管理</a></li>
@@ -83,6 +84,7 @@
                                     </ul>
                                 </li>
                             @endif
+                            <li><a href="">讨论区</a></li>
                         </ul>
                     @endif
 
