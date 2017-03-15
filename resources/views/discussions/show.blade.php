@@ -15,7 +15,7 @@
             </a>
         </div>
 
-        <p class="page-title text-center" style="margin-top:80px;">
+        <p class="page-title text-center" style="margin-top:80px;font-weight: bold;">
             {{$post->title}}
         </p>
         <p style="margin-top:10px;text-align: center;">
@@ -29,13 +29,15 @@
         </div>
 
         <div class="comment" style="margin:80px 0 20px;">
-            <p>评论区</p>
+            <p style="font-weight: bold;font-size:20px;">评论区</p>
             <table style="font-size:15px;">
                 @foreach($comments as $comment)
                     <tr>
                         <td style="text-align: left;">
-                            <p style="margin-top:20px;">
-                                第{{$comment->id}}条评论：
+                            <p style="margin-top:10px;">
+                                <span style="color: red;">
+                                    {{App\User::where('id',$comment->user_id)->first()->name}}
+                                </span>&nbsp;&nbsp;says：
                             </p>
                         </td>
                     </tr>
@@ -46,9 +48,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p style="text-align: right;">
-                                评论时间：{{$comment->created_at}}
-                                评论人：{{App\User::where('id',$comment->user_id)->first()->name}}
+                            <p style="margin-top:10px;">
+                                <span style="color: #5bc0de">
+                                    评论时间：{{$comment->created_at}}
+                                </span>
                             </p>
                         </td>
                     </tr>
