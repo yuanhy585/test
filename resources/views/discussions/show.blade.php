@@ -28,39 +28,27 @@
             {{$post->content}}
         </div>
 
-        <div class="comment" style="margin:80px 0 20px;">
+        <div class="comment" style="margin:80px 0;">
             <p style="font-weight: bold;font-size:20px;">评论区</p>
-            <table style="font-size:15px;">
                 @foreach($comments as $comment)
-                    <tr>
-                        <td style="text-align: left;">
-                            <p style="margin-top:10px;">
-                                <span style="color: red;">
-                                    {{App\User::where('id',$comment->user_id)->first()->name}}
-                                </span>&nbsp;&nbsp;says：
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;">
-                            {{$comment->comment}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p style="margin-top:10px;">
-                                <span style="color: #5bc0de">
-                                    评论时间：{{$comment->created_at}}
-                                </span>
-                            </p>
-                        </td>
-                    </tr>
+                <div style="font-size:15px;margin-top: 40px;">
+                    <p>
+                        <span style="color: red;">
+                            {{App\User::where('id',$comment->user_id)->first()->name}}
+                        </span>&nbsp;&nbsp;says：
+                    </p>
+
+                    <p>{{$comment->comment}}</p>
+
+                    <p style="float:right;margin-top:10px;">
+                        评论时间：{{$comment->created_at}}
+                    </p>
+                </div>
                 @endforeach
-            </table>
         </div>
 
         @if(Auth::user()->role_id > 1)
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary" style="margin-right: 50px;">
                 编辑
             </a>
             <form action="/post/{{$post->id}}/delete" method="post" style="display: inline;">
