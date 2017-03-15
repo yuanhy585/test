@@ -57,13 +57,13 @@
         </div>
 
         @if(Auth::user()->role_id > 1)
-            <a href="" class="btn btn-primary">
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">
                 编辑
             </a>
-            <form action="" method="" style="display: inline;">
+            <form action="/post/{{$post->id}}/delete" method="post" style="display: inline;">
                 {{csrf_field()}}
 
-                <button type="" class="btn btn-danger" onclick="return ifDelete()">
+                <button type="submit" class="btn btn-danger" onclick="return ifDelete()">
                     删除
                 </button>
             </form>

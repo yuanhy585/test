@@ -39,4 +39,12 @@ class DiscussionController extends Controller
         return back();
     }
 
+    public function destroy($id)
+    {
+        $post = Post::where('id',$id)->first();
+        $post->delete();
+
+        return redirect('/discussions');
+    }
+
 }
