@@ -53,7 +53,7 @@
                         <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">
                             编辑
                         </a>
-                        <form action="/posts/{{$post->id}}/delete" method="post" style="display:inline;">
+                        <form action="/user/{{Auth::user()->id}}/posts/{{$post->id}}/delete" method="post" style="display:inline;">
                             {{csrf_field()}}
                             <button type="submit" class="btn btn-danger" onclick="return ifDelete()">
                                 删除
