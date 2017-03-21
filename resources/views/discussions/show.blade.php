@@ -34,7 +34,8 @@
                 <div style="font-size:15px;margin-top: 40px;">
                     <p>
                         <span style="color: red;">
-                            {{App\User::where('id',$comment->user_id)->first()->name}}
+                            {{App\User::where('id',App\Comment::where('post_id',$post->id)->first()->user_id)
+                            ->first()->name}}
                         </span>&nbsp;&nbsp;says：
                     </p>
 

@@ -35,7 +35,7 @@
                 <div class="collapse navbar-collapse">
                     @if(Auth::user())
                         <ul class="nav navbar-nav">
-                            @if(Auth::user()->role_id > 2)
+                            @if(Auth::user()->role_id > 1)
                                 <li class="dropdown">
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                         用户管理<span class="caret"></span>

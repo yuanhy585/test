@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Gate, Auth, Redirect;
 use App\Post;
 use Illuminate\Http\Request;
@@ -94,9 +95,23 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        if (Gate::denies('manage_post',Auth::user()))
+        {
+            return back();
+        }
         $post = Post::where('id',$id)->first();
         $post->delete();
 
+//        $user_id = Post::where('id',$id)->first()->user_id;
+//        $user = User::where('id',$user_id)->first();
+//        if ($user->role_id == 2 || $user_id->role_id == 3)
+//        {
+//            $post = Post::where('id',$id)->where('user_id',$user_id)->first();
+//            $post->delete();
+//        }elseif ($user->role_id == 4){
+//            $post = Post::where('id',$id)->first();
+//            $post->delete();
+//        }
         return back();
     }
 
