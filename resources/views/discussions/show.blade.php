@@ -24,30 +24,12 @@
             发布时间：{{$post->created_at}}
         </p>
 
-        <div class="content">
+        <div class="content" style="margin-bottom:100px;">
             {{$post->content}}
         </div>
 
-        <div class="comment" style="margin:80px 0;">
-            <p style="font-weight: bold;font-size:20px;">评论区</p>
-                @foreach($comments as $comment)
-                <div style="font-size:15px;margin-top: 40px;">
-                    <p>
-                        <span style="color: red;">
-                            {{App\User::where('id',$comment->user_id)->first()->name}}
-                        </span>&nbsp;&nbsp;says：
-                    </p>
-
-                    <p>{{$comment->comment}}</p>
-
-                    <p style="float:right;margin-top:10px;">
-                        评论时间：{{$comment->created_at}}
-                    </p>
-                </div>
-                @endforeach
-        </div>
-
         @if(Auth::user()->role_id > 1)
+            <hr/>
             <a href="/posts/{{$post->id}}/edit" class="btn btn-primary" style="margin-right: 50px;">
                 编辑
             </a>
@@ -58,7 +40,39 @@
                     删除
                 </button>
             </form>
+            <hr/>
         @endif
+
+        <div class="comment" style="margin:40px 0;">
+                @foreach($comments as $comment)
+                <div style="font-size:15px;margin-bottom: 100px;">
+
+                    <div style="width:100%;height:10px;background-color: #ccc;margin-bottom:10px;"></div>
+
+                    <p>
+                        <span style="color: red;">
+                            {{App\User::where('id',$comment->user_id)->first()->name}}
+                        </span>&nbsp;&nbsp;says：
+                    </p>
+
+                    <p>{{$comment->comment}}</p>
+
+                    <form action="/user/{{Auth::user()->id}}/comment/{{$comment->id}}" method="post">
+                        {{csrf_field()}}
+                        <button type="submit" class="btn btn-danger" style="float:right;"
+                                onclick="return ifDelete()">
+                            删除评论
+                        </button>
+                    </form>
+
+                    <p style="clear:both;float:right;margin-top:20px;">
+                        评论时间：{{$comment->created_at}}
+                    </p>
+                </div>
+                @endforeach
+        </div>
+
+        <p style="font-weight: bold;font-size:20px;">评论区</p>
 
         <form action="/comment/store" method="post" style="margin-top:20px;">
             {{csrf_field()}}
