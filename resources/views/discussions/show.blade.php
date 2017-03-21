@@ -34,8 +34,7 @@
                 <div style="font-size:15px;margin-top: 40px;">
                     <p>
                         <span style="color: red;">
-                            {{App\User::where('id',App\Comment::where('post_id',$post->id)->first()->user_id)
-                            ->first()->name}}
+                            {{App\User::where('id',$comment->user_id)->first()->name}}
                         </span>&nbsp;&nbsp;says：
                     </p>
 
@@ -64,7 +63,7 @@
         <form action="/comment/store" method="post" style="margin-top:20px;">
             {{csrf_field()}}
 
-            <input type="hidden" name="user_id" value="{{$post->user_id}}">
+            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
             <input type="hidden" name="post_id" value="{{$post->id}}">
 
             {!! errors_for('content',$errors) !!}
