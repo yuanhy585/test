@@ -59,9 +59,15 @@ Route::group(['middleware'=>'language'],function(){
     });
 });
 
-//api for posts
+
 Route::group(['prefix'=>'api'], function (){
+
+    //api for posts
     Route::get('postList','PostAPIController@getPosts');
+    Route::post('postCreate','PostAPIController@createPost');
+    Route::post('postUpdate','PostAPIController@updatePost');
+    Route::post('postDelete','PostAPIController@deletePost');
+
 });
 
 
