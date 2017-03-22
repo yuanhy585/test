@@ -50,15 +50,17 @@
                     <td>{{App\Profile::where('user_id',$post->user_id)->first()->real_name}}</td>
                     <td>{{$post->created_at}}</td>
                     <td>
-                        <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">
-                            编辑
-                        </a>
-                        <form action="/user/{{Auth::user()->id}}/posts/{{$post->id}}/delete" method="post" style="display:inline;">
-                            {{csrf_field()}}
-                            <button type="submit" class="btn btn-danger" onclick="return ifDelete()">
-                                删除
-                            </button>
-                        </form>
+                        @if((Auth::user()->role_id) > 3 || (Auth::user()->id == $post->user_id))
+                            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">
+                                编辑
+                            </a>
+                            <form action="/posts/{{$post->id}}/delete" method="post" style="display:inline;">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-danger" onclick="return ifDelete()">
+                                    删除
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

@@ -93,22 +93,15 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
-    public function destroy($user_id,$post_id)
+    public function destroy($post_id)
     {
         if (Gate::denies('manage_post',Auth::user()))
         {
             return back();
         }
+        $post = Post::where('id',$post_id)->first();
+        $post->delete();
 
-        $role_id = User::where('id',$user_id)->first()->role_id;
-        if ($role_id == 2 || $role_id == 3)
-        {
-            $post = Post::where('id',$post_id)->where('user_id',$user_id)->first();
-            $post->delete();
-        }elseif ($role_id == 4){
-            $post = Post::where('id',$post_id)->first();
-            $post->delete();
-        }
         return back();
     }
 

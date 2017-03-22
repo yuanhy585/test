@@ -37,7 +37,7 @@ Route::group(['middleware'=>'language'],function(){
         //routes for posts management
         Route::post('posts/store','PostController@store');
         Route::post('posts/{id}/update','PostController@update');
-        Route::post('user/{user_id}/posts/{post_id}/delete','PostController@destroy');
+        Route::post('posts/{post_id}/delete','PostController@destroy');
         Route::resource('posts','PostController',['except'=>'show']);
 
         //routes for discussions management
