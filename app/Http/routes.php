@@ -42,9 +42,8 @@ Route::group(['middleware'=>'language'],function(){
 
         //routes for discussions management
         Route::get('post/{id}','DiscussionController@show');
-        Route::post('post/{id}/delete','DiscussionController@destroy');
         Route::post('comment/store','DiscussionController@store');
-        Route::post('user/{user_id}/comment/{comment_id}','DiscussionController@deleteComment');
+        Route::post('comment/{comment_id}','DiscussionController@deleteComment');
         Route::resource('discussions','DiscussionController');
 
         //routes for reports

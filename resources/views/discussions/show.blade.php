@@ -28,29 +28,10 @@
             {{$post->content}}
         </div>
 
-        @if(Auth::user()->role_id > 1)
-            <hr/>
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary" style="margin-right: 50px;">
-                编辑
-            </a>
-            <form action="/post/{{$post->id}}/delete" method="post" style="display: inline;">
-                {{csrf_field()}}
-
-                <button type="submit" class="btn btn-danger" onclick="return ifDelete()">
-                    删除
-                </button>
-            </form>
-            <hr/>
-        {{--文章删除和编辑不要在这里操作，应该在文章列表里操作，所以这块应该没有编辑和删除文章--}}
-        @endif
-
-
         <div class="comment" style="margin:40px 0;">
-                @foreach($comments as $comment)
+            @foreach($comments as $comment)
                 <div style="font-size:15px;margin-bottom: 100px;">
-
                     <div style="width:100%;height:10px;background-color: #ccc;margin-bottom:10px;"></div>
-
                     <p>
                         <span style="color: red;">
                             {{App\User::where('id',$comment->user_id)->first()->name}}
@@ -59,41 +40,30 @@
 
                     <p>{{$comment->comment}}</p>
 
-
-
-
                     {{--主要就是下面这个表单（现在规定只有超级管理员可以删除所有帖子及评论，--}}
                     {{--管理员或者老师可以删除自己创建的帖子及评论，学员只可以删除自己评论），然后在下面--}}
                     {{--可以来个if判断，可以像下面这么写，--}}
                     {{--if((Auth::user()->role_id > 3//这个是超级管理员可以删除所有帖子)--}}
                     {{--|| (Auth::user()->id == $post->user_id //这个表示管理员可以删除所有自己创建的帖子下的评论)--}}
                     {{--|| (Auth::user()->id == $comment->user_id //这个表示评论者可以删除自己的评论))--}}
-                    {{--<form>--}}
-                        {{----}}
-                    {{--</form>--}}
-                    {{--endif--}}
 
-                    {{--下面form写的有问题,参数应该这样写<form action="/user/{{$comment->user_id}}/comment/{{$comment->id}}" method="post">--}}
-                    <form action="/user/{{Auth::user()->id}}/comment/{{$comment->id}}" method="post">
-                        {{csrf_field()}}
-                        <button type="submit" class="btn btn-danger" style="float:right;"
-                                onclick="return ifDelete()">
-                            删除评论
-                        </button>
-                    </form>
-
-
-
-
-
-
-
+                    @if(Auth::user()->role_id > 3
+                    || (Auth::user()->id == $post->user_id)
+                    || (Auth::user()->id == $comment->user_id))
+                        <form action="/comment/{{$comment->id}}/delete" method="post">
+                            {{csrf_field()}}
+                            <button type="submit" class="btn btn-danger" style="float:right;"
+                                    onclick="return ifDelete()">
+                                删除评论
+                            </button>
+                        </form>
+                    @endif
 
                     <p style="clear:both;float:right;margin-top:20px;">
                         评论时间：{{$comment->created_at}}
                     </p>
                 </div>
-                @endforeach
+            @endforeach
         </div>
 
         <p style="font-weight: bold;font-size:20px;">评论区</p>
