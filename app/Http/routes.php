@@ -56,10 +56,12 @@ Route::group(['middleware'=>'language'],function(){
         Route::get('importLog/{id}/download','ImportController@download');
         Route::delete('importLog/{id}','ImportController@destroy');
 
-
     });
-
 });
 
+//api for posts
+Route::group(['prefix'=>'api'], function (){
+    Route::get('postList','PostAPIController@getPosts');
+});
 
 
