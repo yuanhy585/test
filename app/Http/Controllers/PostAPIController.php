@@ -48,9 +48,8 @@ class PostAPIController extends Controller
     public function createPost(Request $request)
     {
         $inputs = $request->all();
-        $user_id = $request->get('user_id');
-        $count = User::where('id',$user_id)->where('role_id','>',1)->count();
-
+        $id = $request->get('id');
+        $count = User::where('id',$id)->where('role_id','>',1)->count();
         if ($count == 0)
         {
             $rtn = 101;
@@ -59,12 +58,20 @@ class PostAPIController extends Controller
         }
         else
         {
-            Auth::loginUsingId($user_id);
+            Auth::loginUsingId($id);
 
             $post = new Post();
+            if ($inputs['title'] == null)
+            {
+                return "标题不可为空";
+            }
             $post->title = $inputs['title'];
+            if ($inputs['content'] == null)
+            {
+                return "内容不可为空";
+            }
             $post->content = $inputs['content'];
-            $post->user_id = $user_id;
+            $post->user_id = $inputs['id'];
 
             $post->save();
 
@@ -79,9 +86,9 @@ class PostAPIController extends Controller
     public function updatePost(Request $request)
     {
         $inputs = $request->all();
-        $user_id = $request->get('user_id');
-        $count = User::where('id',$user_id)->where('role_id', '>', 1)->count();
-        $user = User::where('id',$user_id)->first();
+        $id = $request->get('id');
+        $count = User::where('id',$id)->where('role_id', '>', 1)->count();
+        $user = User::where('id',$id)->first();
         $post_id = $request->get('post_id');
         $post = Post::where('id',$post_id)->first();
 
@@ -93,17 +100,31 @@ class PostAPIController extends Controller
         }
         else
         {
-            Auth::loginUsingId($user_id);
-            if (($user_id == $post->user_id) || ($user->role_id > 3))
+            Auth::loginUsingId($id);
+            if (($id == $post->user_id) || ($user->role_id > 3))
             {
                 $post = Post::where('id',$post_id)->first();
+                if ($inputs['title'] == null)
+                {
+                    return "标题不可为空";
+                }
                 $post->title = $inputs['title'];
+                if ($inputs['content'] == null)
+                {
+                    return "内容不可为空";
+                }
                 $post->content = $inputs['content'];
                 $post->save();
 
                 $rtn = 100;
                 $message = "修改成功";
                 $response = ['code'=>$rtn, 'message'=>$message];
+            }
+            else
+            {
+                $rtn = 102;
+                $message = "抱歉，您对此文章无修改权限";
+                $response = ['code'=>$rtn,'message'=>$message];
             }
         }
         return response()->json($response);
