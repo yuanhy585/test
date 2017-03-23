@@ -16,11 +16,11 @@ class CommentAPIController extends Controller
     {
         $user_id = $request->get('user_id');
         $post_id = $request->get('post_id');
-        $count = Post::where('id',$post_id)->count();
+        $post = Post::where('id',$post_id)->first();
 
         Auth::loginUsingId($user_id);
 
-        if ($count == 0)
+        if (empty($post))
         {
             $rtn = 101;
             $message = "该文章不存在";
@@ -28,7 +28,6 @@ class CommentAPIController extends Controller
         }
         else
         {
-            $post = Post::where('id',$post_id)->first();
             $comments = Comment::where('post_id',$post_id)->get();
 
             $postDatas = [];
@@ -64,10 +63,10 @@ class CommentAPIController extends Controller
         $inputs = $request->all();
         $user_id = $request->get('user_id');
         $post_id = $request->get('post_id');
-        $count = Post::where('id',$post_id)->count();
+        $post = Post::where('id',$post_id)->first();
 
         Auth::loginUsingId($user_id);
-        if ($count == 0)
+        if (empty($post))
         {
             $rtn = 101;
             $message = "该文章不存在";
@@ -75,7 +74,6 @@ class CommentAPIController extends Controller
         }
         else
         {
-            $post = Post::where('id',$post_id)->first();
             $postDatas = [];
             $postData['title'] = $post->title;
             $postData['content'] = $post->content;
@@ -113,10 +111,10 @@ class CommentAPIController extends Controller
         $post = Post::where('id',$post_id)->first();
 
         $comment_id = $request->get('comment_id');
-        $count = Comment::where('id',$comment_id)->count();
+        $comment = Comment::where('id',$comment_id)->first();
 
         Auth::loginUsingId($user_id);
-        if ($count == 0)
+        if (empty($comment))
         {
             $rtn = 101;
             $message = "该评论不存在";
@@ -124,8 +122,7 @@ class CommentAPIController extends Controller
         }
         else
         {
-            $comment = Comment::where('id',$comment_id)->first();
-            if ($user_id == $comment->user_id || ($user_id == $post->user_id) || ($user->role_id > 3))
+            if (($comment->user_id == $user_id) || ($post->user_id == $user_id) || ($user->role_id > 3))
             {
                 $comment->delete();
             }
@@ -137,7 +134,6 @@ class CommentAPIController extends Controller
             $rtn = 100;
             $message = "评论删除成功";
             $response = ['code'=>$rtn, 'message'=>$message];
-
         }
 
         return response()->json($response);
