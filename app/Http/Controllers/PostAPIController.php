@@ -14,9 +14,11 @@ class PostAPIController extends Controller
     public function getPosts(Request $request)
     {
         $user_id = $request->get('user_id');
-        $count = User::where('id',$user_id)->count();
+        $user = User::where('id',$user_id)->first();
 
-        if ($count == 0)
+        Auth::loginUsingId($user_id);
+
+        if (!$user)
         {
             $rtn = 101;
             $message = "无此人信息，无法登录";
@@ -24,7 +26,6 @@ class PostAPIController extends Controller
         }
         else
         {
-            Auth::loginUsingId($user_id);
             $datas = array();
             $posts = Post::all();
 
@@ -48,9 +49,12 @@ class PostAPIController extends Controller
     public function createPost(Request $request)
     {
         $inputs = $request->all();
-        $id = $request->get('id');
-        $count = User::where('id',$id)->where('role_id','>',1)->count();
-        if ($count == 0)
+        $user_id = $request->get('user_id');
+        $user = User::where('id',$user_id)->first();
+
+        Auth::loginUsingId($user_id);
+
+        if (!$user)
         {
             $rtn = 101;
             $message = "无此人信息，无法登录";
@@ -58,52 +62,9 @@ class PostAPIController extends Controller
         }
         else
         {
-            Auth::loginUsingId($id);
-
-            $post = new Post();
-            if ($inputs['title'] == null)
+            if ($user->role_id > 1)
             {
-                return "标题不可为空";
-            }
-            $post->title = $inputs['title'];
-            if ($inputs['content'] == null)
-            {
-                return "内容不可为空";
-            }
-            $post->content = $inputs['content'];
-            $post->user_id = $inputs['id'];
-
-            $post->save();
-
-            $rtn = 100;
-            $message = "创建成功";
-            $response = ['code' => $rtn, 'message'=>$message];
-        }
-
-        return response()->json($response);
-    }
-
-    public function updatePost(Request $request)
-    {
-        $inputs = $request->all();
-        $id = $request->get('id');
-        $count = User::where('id',$id)->where('role_id', '>', 1)->count();
-        $user = User::where('id',$id)->first();
-        $post_id = $request->get('post_id');
-        $post = Post::where('id',$post_id)->first();
-
-        if ($count == 0)
-        {
-            $rtn = 101;
-            $message = "无此人信息，无法登录";
-            $response = ['code'=>$rtn, 'message'=>$message];
-        }
-        else
-        {
-            Auth::loginUsingId($id);
-            if (($id == $post->user_id) || ($user->role_id > 3))
-            {
-                $post = Post::where('id',$post_id)->first();
+                $post = new Post();
                 if ($inputs['title'] == null)
                 {
                     return "标题不可为空";
@@ -114,17 +75,63 @@ class PostAPIController extends Controller
                     return "内容不可为空";
                 }
                 $post->content = $inputs['content'];
+                $post->user_id = $inputs['user_id'];
+
                 $post->save();
 
                 $rtn = 100;
-                $message = "修改成功";
-                $response = ['code'=>$rtn, 'message'=>$message];
+                $message = "创建成功";
+                $response = ['code' => $rtn, 'message'=>$message];
             }
-            else
+        }
+
+        return response()->json($response);
+    }
+
+    public function updatePost(Request $request)
+    {
+        $inputs = $request->all();
+        $user_id = $request->get('user_id');
+        $post_id = $request->get('post_id');
+        $user = User::where('id',$user_id)->first();
+        $post = Post::where('id',$post_id)->first();
+
+        Auth::loginUsingId($user_id);
+        if (!$user)
+        {
+            $rtn = 101;
+            $message = "无此人信息，无法登录";
+            $response = ['code'=>$rtn, 'message'=>$message];
+        }
+        else
+        {
+            if (!empty($post))
             {
-                $rtn = 102;
-                $message = "抱歉，您对此文章无修改权限";
-                $response = ['code'=>$rtn,'message'=>$message];
+                if (($user_id == $post->user_id) || ($user->role_id > 3))
+                {
+                    $post = Post::where('id',$post_id)->first();
+                    if ($inputs['title'] == null)
+                    {
+                        return "标题不可为空";
+                    }
+                    $post->title = $inputs['title'];
+                    if ($inputs['content'] == null)
+                    {
+                        return "内容不可为空";
+                    }
+                    $post->content = $inputs['content'];
+                    $post->save();
+
+                    $rtn = 100;
+                    $message = "修改成功";
+                    $response = ['code'=>$rtn, 'message'=>$message];
+                }
+                else
+                {
+                    $rtn = 102;
+                    $message = "抱歉，您对此文章无修改权限";
+                    $response = ['code'=>$rtn,'message'=>$message];
+                }
             }
         }
         return response()->json($response);
@@ -135,12 +142,10 @@ class PostAPIController extends Controller
         //其他接口也有这样问题
         $post_id = $request->get('post_id');
         $user_id = $request->get('user_id');
-//        $count = User::where('id',$user_id)->where('role_id', '>', 1)->count();
-//        $count = User::where('id',$user_id)->count();不需要，直接下面一行代码就行了
         $user = User::where('id',$user_id)->first();
         $post = Post::where('id',$post_id)->first();
 
-//        if ($count == 0)
+        Auth::loginUsingId($user_id);
         if (!$user)
         {
             $rtn = 101;
@@ -149,13 +154,11 @@ class PostAPIController extends Controller
         }
         else
         {
-            Auth::loginUsingId($user_id);
-            //这里应该判断是否有这篇文章
+            //判断是否有这篇文章
             if(!empty($post))
             {
                 if (($user_id == $post->user_id) || ($user->role_id > 3))
                 {
-//                $post = Post::where('id',$post_id)->first();这一块重复获取
                     $post->delete();
                 }
 
