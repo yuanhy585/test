@@ -16,5 +16,8 @@ class VerifyCsrfToken extends BaseVerifier
         '/api/postCreate',
         '/api/postUpdate',
         '/api/postDelete',
+        '/api/commentList',
+        '/api/commentCreate',
+        '/api/commentDelete',
     ];
 }

@@ -68,6 +68,11 @@ Route::group(['prefix'=>'api'], function (){
     Route::post('postUpdate','PostAPIController@updatePost');
     Route::post('postDelete','PostAPIController@deletePost');
 
+    //api for comments
+    Route::get('commentList','CommentAPIController@getComments');
+    Route::post('commentCreate','CommentAPIController@createComment');
+    Route::post('commentDelete','CommentAPIController@deleteComment');
+
 });
 
 
