@@ -132,13 +132,16 @@ class PostAPIController extends Controller
 
     public function deletePost(Request $request)
     {
+        //其他接口也有这样问题
         $post_id = $request->get('post_id');
         $user_id = $request->get('user_id');
-        $count = User::where('id',$user_id)->where('role_id', '>', 1)->count();
+//        $count = User::where('id',$user_id)->where('role_id', '>', 1)->count();
+//        $count = User::where('id',$user_id)->count();不需要，直接下面一行代码就行了
         $user = User::where('id',$user_id)->first();
         $post = Post::where('id',$post_id)->first();
 
-        if ($count == 0)
+//        if ($count == 0)
+        if (!$user)
         {
             $rtn = 101;
             $message = "无此人信息，无法登录";
@@ -147,15 +150,26 @@ class PostAPIController extends Controller
         else
         {
             Auth::loginUsingId($user_id);
-            if (($user_id == $post->user_id) || ($user->role_id > 3))
+            //这里应该判断是否有这篇文章
+            if(!empty($post))
             {
-                $post = Post::where('id',$post_id)->first();
-                $post->delete();
+                if (($user_id == $post->user_id) || ($user->role_id > 3))
+                {
+//                $post = Post::where('id',$post_id)->first();这一块重复获取
+                    $post->delete();
+                }
+
+                $rtn = 100;
+                $message = "删除成功";
+                $response = ['code'=>$rtn, 'message'=>$message];
+            }
+            else
+            {
+                $rtn = 100;
+                $message = "文章不存在";
+                $response = ['code'=>$rtn, 'message'=>$message];
             }
 
-            $rtn = 100;
-            $message = "删除成功";
-            $response = ['code'=>$rtn, 'message'=>$message];
         }
 
         return response()->json($response);
